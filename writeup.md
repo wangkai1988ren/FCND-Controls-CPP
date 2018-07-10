@@ -1,5 +1,4 @@
 # FCND - Building a Controller
-![Quad Image](./misc/enroute.png)
 
 # Content
 1、Implemented body rate control in C++.
@@ -18,7 +17,7 @@ The whole C++ code implementing controll function is contained in source file Qu
 
 
 ### Control Architecture
-![Quad Image](./misc/ca.png)
+![Quad Image](./misc/ca.jpg)
 
 #### 1. Implemented body rate control in C++.The controller should be a proportional controller on body rates to commanded moments. The controller should take into account the moments of inertia of the drone when calculating the commanded moments.
 In the line 105~107 I use the difference value of pqrCmd and pqr(estimated body rates), mutiply the inerita and kpPQR rate to get the momentCmd.
@@ -30,7 +29,7 @@ step 1: Dividing collThrustCmd by mass to get collective accelerate.
 step 2: constrain target_R13/R23 in -maxTiltAngle and maxTiltAngle.target_R13/R23 is accelCmd divding collective accelerate.
 step 3: Using a P method to command b_x_command_dot and b_y_command_dot.
 step 4: Rotating the command b_x_command_dot and b_y_command_dot to get pqrCmd
-![Top Down View](./misc/rp.png)
+![Top Down View](./misc/rp.jpg)
 
 #### 3. Implement altitude controller in C++.The controller should use both the down position and the down velocity to command thrust. Ensure that the output value is indeed thrust (the drone's mass needs to be accounted for) and that the thrust includes the non-linear effects from non-zero roll/pitch angles.Additionally, the C++ altitude controller should contain an integrator to handle the weight non-idealities presented in scenario 4.
 
@@ -42,7 +41,7 @@ float velCmd_bar = kpPosZ * (posZCmd - posZ)+ velZCmd;
 float a_z_desire = accelZCmd + kpVelZ * (velCmd_bar - velZ) + KiPosZ * this->integratedAltitudeError;
 thrust = mass * ( -a_z_desire + 9.81f) / R(2, 2);
 ```
-![Top Down View](./misc/at.png)
+![Top Down View](./misc/at.jpg)
 
 #### 4. Implement lateral position control in C++.The controller should use the local NE position and velocity to generate a commanded local acceleration.
 
